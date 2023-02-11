@@ -1,0 +1,172 @@
+{
+	"id": "ba8060b4-060c-4fd9-a47e-0acd24cb6ec7",
+	"name": "dev_user",
+	"timestamp": "2023-02-11T06:13:22.272Z",
+	"collection_id": "a08a8fa7-c02b-44d2-b4ac-72d13c0739d0",
+	"folder_id": 0,
+	"environment_id": "52f3d496-70ae-4ace-ab3d-cd984264bbbf",
+	"totalPass": 8,
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "349cd3ed-e37e-4d73-9a2b-716af6fac75c",
+			"name": "用户注册1.3",
+			"url": "https://localhost/dreamfuture/iam/user/v1.3/userregister",
+			"time": 129,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 1000ms": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				129
+			],
+			"allTests": [
+				{
+					"Response time is less than 1000ms": true,
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "54ec9562-b835-474e-967a-1887f8a5384c",
+			"name": "获取验证码",
+			"url": "https://localhost/dreamfuture/captcha/v1.3/getCaptcha",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 1000ms": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Response time is less than 1000ms": true,
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "64202744-6d49-4953-b8ab-7ed4af657954",
+			"name": "用户列表1.0",
+			"url": "https://localhost/dreamfuture/iam/user/v1.31/users?size=5",
+			"time": 45,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 1000ms": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				45
+			],
+			"allTests": [
+				{
+					"Response time is less than 1000ms": true,
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "4809bba4-5632-4faf-a443-9e9f949eeae7",
+			"name": "用户登录1.3",
+			"url": "https://localhost/dreamfuture/iam/user/v1.3/userlogin",
+			"time": 43,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 1000ms": true,
+				"Status code is 200": true,
+				"Your test name": false
+			},
+			"testPassFailCounts": {
+				"Response time is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Your test name": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				43
+			],
+			"allTests": [
+				{
+					"Response time is less than 1000ms": true,
+					"Status code is 200": true,
+					"Your test name": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 241,
+	"collection": {
+		"requests": [
+			{
+				"id": "349cd3ed-e37e-4d73-9a2b-716af6fac75c",
+				"method": "POST"
+			},
+			{
+				"id": "54ec9562-b835-474e-967a-1887f8a5384c",
+				"method": "GET"
+			},
+			{
+				"id": "64202744-6d49-4953-b8ab-7ed4af657954",
+				"method": "GET"
+			},
+			{
+				"id": "4809bba4-5632-4faf-a443-9e9f949eeae7",
+				"method": "POST"
+			}
+		]
+	}
+}

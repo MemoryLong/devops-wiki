@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "a08a8fa7-c02b-44d2-b4ac-72d13c0739d0",
+		"name": "dev_user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户注册1.3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 测试脚本\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+							"\r",
+							"if(JSON.parse(responseBody).code == 0){\r",
+							"    // 参数设置脚本\r",
+							"    pm.globals.set(\"username\", JSON.parse(responseBody).data.name);\r",
+							"}else{\r",
+							"    postman.setNextRequest(\"null\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"zhouhaifeng{{$randomInt}}\",\r\n    \"password\": {{password}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{httpsurl}}/dreamfuture/iam/user/v1.3/userregister",
+					"host": [
+						"{{httpsurl}}"
+					],
+					"path": [
+						"dreamfuture",
+						"iam",
+						"user",
+						"v1.3",
+						"userregister"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取验证码",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 测试脚本\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+							"\r",
+							"if(JSON.parse(responseBody).code == 0){\r",
+							"    // 参数设置脚本\r",
+							"    pm.globals.set(\"uuid\", JSON.parse(responseBody).data.uuid);\r",
+							"}else{\r",
+							"    postman.setNextRequest(\"null\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{httpsurl}}/dreamfuture/captcha/v1.3/getCaptcha",
+					"host": [
+						"{{httpsurl}}"
+					],
+					"path": [
+						"dreamfuture",
+						"captcha",
+						"v1.3",
+						"getCaptcha"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户列表1.0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 测试脚本\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+							"\r",
+							"if(JSON.parse(responseBody).code != 0){\r",
+							"    postman.setNextRequest(\"null\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "token.eyJraWQiOiI0MyIsInR5cCI6IkpXVCIsImFsZyI6IkhTMjU2In0.eyJzdWIiOiIxMjM0IiwiZXhwIjoxNjE0NjY1NTI1LCJpYXQiOjE2MTQ2NjQ5MjV9.6hQgnVLFYj_4zFZZH_Ka3bbG3KLdHebhr9WIccAfkUw"
+					}
+				],
+				"url": {
+					"raw": "{{httpsurl}}/dreamfuture/iam/user/v1.31/users?size=5",
+					"host": [
+						"{{httpsurl}}"
+					],
+					"path": [
+						"dreamfuture",
+						"iam",
+						"user",
+						"v1.31",
+						"users"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户登录1.3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 测试脚本\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+							"});\r",
+							"\r",
+							"if(JSON.parse(responseBody).code != 0){\r",
+							"    postman.setNextRequest(\"null\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOm51bGwsInR5cCI6IkpXVCIsImFsZyI6IkhTMjU2In0.eyJpc3MiOiJ3ZWRyZWFtcy5jbiIsImV4cCI6MTY3NTk5OTI4NywidXNlck5hbWUiOiJ6aG91aGFpZmVuZzM3MCIsImlhdCI6MTY3NTk5ODA4NywidXNlcklkIjowfQ.-LntuAqoSBDdOboB44BgvkLldUuXjLTo5Asc2X20R-8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\":\"{{password}}\",\r\n    \"vCodeStr\":\"vfvm\",\r\n    \"uuid\":\"{{uuid}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{httpsurl}}/dreamfuture/iam/user/v1.3/userlogin",
+					"host": [
+						"{{httpsurl}}"
+					],
+					"path": [
+						"dreamfuture",
+						"iam",
+						"user",
+						"v1.3",
+						"userlogin"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "验证码校验",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{httpsurl}}/dreamfuture/captcha/v1/checkCaptcha?vCode=vfvm",
+					"host": [
+						"{{httpsurl}}"
+					],
+					"path": [
+						"dreamfuture",
+						"captcha",
+						"v1",
+						"checkCaptcha"
+					],
+					"query": [
+						{
+							"key": "vCode",
+							"value": "vfvm"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户注册（含验证码）1.3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"zhouhaifeng1008\",\r\n    \"password\": 123456, \r\n    \"vCodeStr\": \"qejx\",\r\n    \"uuid\": \"b1f41859-3eb0-4c21-b8ad-54edbae1d78b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{httpsurl}}/dreamfuture/iam/user/v1.3/userregisterwithvcode",
+					"host": [
+						"{{httpsurl}}"
+					],
+					"path": [
+						"dreamfuture",
+						"iam",
+						"user",
+						"v1.3",
+						"userregisterwithvcode"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
