@@ -1,0 +1,1340 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "a08a8fa7-c02b-44d2-b4ac-72d13c0739d0"
+    },
+    "item": [
+      {
+        "id": "19c0439f-5154-409d-89ed-a81ec4889182",
+        "name": "用户注册1.3",
+        "request": {
+          "url": {
+            "path": [
+              "dreamfuture",
+              "iam",
+              "user",
+              "v1.3",
+              "userregister"
+            ],
+            "host": [
+              "{{httpsurl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"username\": \"zhouhaifeng{{$randomInt}}\",\r\n    \"password\": {{password}}\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "8419c522-32bf-49cc-8c40-ee4e80649831",
+              "type": "text/javascript",
+              "exec": [
+                "// 测试脚本\r",
+                "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                "});\r",
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                "\r",
+                "if(JSON.parse(responseBody).code == 0){\r",
+                "    // 参数设置脚本\r",
+                "    pm.globals.set(\"username\", JSON.parse(responseBody).data.name);\r",
+                "}else{\r",
+                "    postman.setNextRequest(\"null\");\r",
+                "}"
+              ],
+              "_lastExecutionId": "aa0b20f6-38b1-4461-ac91-544f2599aba2"
+            }
+          }
+        ]
+      },
+      {
+        "id": "53fd809d-26c9-465b-9bac-60708ccd4e2d",
+        "name": "获取验证码",
+        "request": {
+          "url": {
+            "path": [
+              "dreamfuture",
+              "captcha",
+              "v1.3",
+              "getCaptcha"
+            ],
+            "host": [
+              "{{httpsurl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "9917672a-13a9-486b-a43e-d5b803d436a0",
+              "type": "text/javascript",
+              "exec": [
+                "// 测试脚本\r",
+                "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                "});\r",
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                "\r",
+                "if(JSON.parse(responseBody).code == 0){\r",
+                "    // 参数设置脚本\r",
+                "    pm.globals.set(\"uuid\", JSON.parse(responseBody).data.uuid);\r",
+                "}else{\r",
+                "    postman.setNextRequest(\"null\");\r",
+                "}"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "f57a6f27-7530-4113-972a-9b5748a1d95a",
+        "name": "用户列表1.0",
+        "request": {
+          "url": {
+            "path": [
+              "dreamfuture",
+              "iam",
+              "user",
+              "v1.31",
+              "users"
+            ],
+            "host": [
+              "{{httpsurl}}"
+            ],
+            "query": [
+              {
+                "key": "size",
+                "value": "5"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "token.eyJraWQiOiI0MyIsInR5cCI6IkpXVCIsImFsZyI6IkhTMjU2In0.eyJzdWIiOiIxMjM0IiwiZXhwIjoxNjE0NjY1NTI1LCJpYXQiOjE2MTQ2NjQ5MjV9.6hQgnVLFYj_4zFZZH_Ka3bbG3KLdHebhr9WIccAfkUw"
+            }
+          ],
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "a3121f19-9297-4f7b-a5a7-19095d5a0ed5",
+              "type": "text/javascript",
+              "exec": [
+                "// 测试脚本\r",
+                "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                "});\r",
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "\r",
+                "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                "\r",
+                "if(JSON.parse(responseBody).code != 0){\r",
+                "    postman.setNextRequest(\"null\");\r",
+                "}"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "374ab20d-8658-4b31-b6fc-9d68e756787b",
+        "name": "用户登录1.3",
+        "request": {
+          "url": {
+            "path": [
+              "dreamfuture",
+              "iam",
+              "user",
+              "v1.3",
+              "userlogin"
+            ],
+            "host": [
+              "{{httpsurl}}"
+            ],
+            "query": [
+              {
+                "disabled": true,
+                "key": "name",
+                "value": "{{name}}"
+              },
+              {
+                "disabled": true,
+                "key": "password",
+                "value": "{{password}}"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\":\"{{password}}\",\r\n    \"vCodeStr\":\"vfvm\",\r\n    \"uuid\":\"{{uuid}}\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "type": "string",
+                "value": "eyJraWQiOm51bGwsInR5cCI6IkpXVCIsImFsZyI6IkhTMjU2In0.eyJpc3MiOiJ3ZWRyZWFtcy5jbiIsImV4cCI6MTY3NTk5OTI4NywidXNlck5hbWUiOiJ6aG91aGFpZmVuZzM3MCIsImlhdCI6MTY3NTk5ODA4NywidXNlcklkIjowfQ.-LntuAqoSBDdOboB44BgvkLldUuXjLTo5Asc2X20R-8",
+                "key": "token"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "f062fb42-0813-41be-9562-f68bc5b9f9ba",
+              "type": "text/javascript",
+              "exec": [
+                "// 测试脚本\r",
+                "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                "});\r",
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Your test name\", function () {\r",
+                "    pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                "});\r",
+                "\r",
+                "if(JSON.parse(responseBody).code != 0){\r",
+                "    postman.setNextRequest(\"null\");\r",
+                "}"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "5886e409-9fb8-4b08-b917-f916152d5e58",
+        "name": "验证码校验",
+        "request": {
+          "url": {
+            "path": [
+              "dreamfuture",
+              "captcha",
+              "v1",
+              "checkCaptcha"
+            ],
+            "host": [
+              "{{httpsurl}}"
+            ],
+            "query": [
+              {
+                "key": "vCode",
+                "value": "vfvm"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "urlencoded",
+            "urlencoded": []
+          }
+        },
+        "response": [],
+        "event": []
+      },
+      {
+        "id": "8ac04d91-489e-4e24-a64b-243666a66ed7",
+        "name": "用户注册（含验证码）1.3",
+        "request": {
+          "url": {
+            "path": [
+              "dreamfuture",
+              "iam",
+              "user",
+              "v1.3",
+              "userregisterwithvcode"
+            ],
+            "host": [
+              "{{httpsurl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"username\": \"zhouhaifeng1008\",\r\n    \"password\": 123456, \r\n    \"vCodeStr\": \"qejx\",\r\n    \"uuid\": \"b1f41859-3eb0-4c21-b8ad-54edbae1d78b\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "a08a8fa7-c02b-44d2-b4ac-72d13c0739d0",
+      "name": "dev_user",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "postman_exported_at": "2023-02-11T04:43:47.298Z",
+      "postman_exported_using": "Postman/7.36.5"
+    },
+    "id": "52f3d496-70ae-4ace-ab3d-cd984264bbbf",
+    "name": "localhost",
+    "values": [
+      {
+        "type": "any",
+        "value": "",
+        "key": "name"
+      },
+      {
+        "type": "any",
+        "value": "https://localhost",
+        "key": "httpsurl"
+      },
+      {
+        "type": "any",
+        "value": "http://localhost:9001",
+        "key": "httpurl"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "uuid"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "username"
+      }
+    ]
+  },
+  "globals": {
+    "_": {
+      "postman_variable_scope": "globals",
+      "postman_exported_at": "2023-02-11T04:49:04.135Z",
+      "postman_exported_using": "Postman/7.36.5"
+    },
+    "id": "6cbe9525-24bc-4fe5-8568-30dbda941ea2",
+    "name": "My Workspace Globals",
+    "values": [
+      {
+        "type": "any",
+        "value": "123456",
+        "key": "password"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "vCodeStr"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "username"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "uuid"
+      }
+    ]
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 1
+      },
+      "prerequests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 1
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 70,
+      "responseMin": 70,
+      "responseMax": 70,
+      "responseSd": 0,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1676109272564,
+      "completed": 1676109272698
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 6,
+          "cycles": 2,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "25361cd9-b07f-4879-b5df-e6b330d36130",
+          "httpRequestId": "42f2407b-f2e0-40d2-8c2a-a65f5112e0e4"
+        },
+        "item": {
+          "id": "19c0439f-5154-409d-89ed-a81ec4889182",
+          "name": "用户注册1.3",
+          "request": {
+            "url": {
+              "path": [
+                "dreamfuture",
+                "iam",
+                "user",
+                "v1.3",
+                "userregister"
+              ],
+              "host": [
+                "{{httpsurl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"zhouhaifeng{{$randomInt}}\",\r\n    \"password\": {{password}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8419c522-32bf-49cc-8c40-ee4e80649831",
+                "type": "text/javascript",
+                "exec": [
+                  "// 测试脚本\r",
+                  "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                  "});\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                  "\r",
+                  "if(JSON.parse(responseBody).code == 0){\r",
+                  "    // 参数设置脚本\r",
+                  "    pm.globals.set(\"username\", JSON.parse(responseBody).data.name);\r",
+                  "}else{\r",
+                  "    postman.setNextRequest(\"null\");\r",
+                  "}"
+                ],
+                "_lastExecutionId": "aa0b20f6-38b1-4461-ac91-544f2599aba2"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "dreamfuture",
+              "iam",
+              "user",
+              "v1.3",
+              "userregister"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.29.0",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "674d5ecd-2665-4108-8577-bd85b37ebe3f",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "63",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"username\": \"zhouhaifeng283\",\r\n    \"password\": 123456\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "b2199b9b-6462-4274-9c28-1b93a5c2f1a1",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sat, 11 Feb 2023 09:54:32 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              49,
+              48,
+              48,
+              49,
+              44,
+              34,
+              109,
+              101,
+              115,
+              115,
+              97,
+              103,
+              101,
+              34,
+              58,
+              34,
+              231,
+              148,
+              168,
+              230,
+              136,
+              183,
+              229,
+              144,
+              141,
+              229,
+              183,
+              178,
+              228,
+              189,
+              191,
+              231,
+              148,
+              168,
+              239,
+              188,
+              140,
+              232,
+              175,
+              183,
+              232,
+              190,
+              147,
+              229,
+              133,
+              165,
+              230,
+              156,
+              170,
+              228,
+              189,
+              191,
+              231,
+              148,
+              168,
+              231,
+              148,
+              168,
+              230,
+              136,
+              183,
+              229,
+              144,
+              141,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 70,
+          "responseSize": 74
+        },
+        "id": "19c0439f-5154-409d-89ed-a81ec4889182",
+        "assertions": [
+          {
+            "assertion": "Response time is less than 1000ms",
+            "skipped": false
+          },
+          {
+            "assertion": "Status code is 200",
+            "skipped": false
+          }
+        ],
+        "testScript": [
+          {
+            "error": {
+              "name": "AssertionError",
+              "message": "expected '用户名已使用，请输入未使用用户名' to deeply equal '成功'",
+              "showDiff": true,
+              "actual": "用户名已使用，请输入未使用用户名",
+              "expected": "成功",
+              "operator": "strictEqual",
+              "stack": "AssertionError: expected '用户名已使用，请输入未使用用户名' to deeply equal '成功'\n    at Object.eval (eval at exec (evalmachine.<anonymous>:58:1788403), <anonymous>:11:48)\n    at u.exec (evalmachine.<anonymous>:58:1788438)\n    at t.exports (evalmachine.<anonymous>:58:5743)\n    at Object.<anonymous> (evalmachine.<anonymous>:58:7440)\n    at evalmachine.<anonymous>:15:26\n    at Array.forEach (<anonymous>)\n    at Object.emit (evalmachine.<anonymous>:14:54)\n    at evalmachine.<anonymous>:51:24\n    at evalmachine.<anonymous>:5:21\n    at evalmachine.<anonymous>:6:18",
+              "checksum": "667100151aaedd296545354858b827c4",
+              "id": "27ec0c96-5764-46df-a92b-6fbadd891779",
+              "timestamp": 1676109272689,
+              "stacktrace": [
+                {
+                  "fileName": "<anonymous>",
+                  "lineNumber": 11,
+                  "functionName": "Object.eval (eval at exec (evalmachine.<anonymous>:58:1788403),",
+                  "typeName": "Object",
+                  "methodName": "eval (eval at exec (evalmachine.<anonymous>:58:1788403),",
+                  "columnNumber": 48,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 58,
+                  "functionName": "u.exec",
+                  "typeName": "u",
+                  "methodName": "exec",
+                  "columnNumber": 1788438,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 58,
+                  "functionName": "t.exports",
+                  "typeName": "t",
+                  "methodName": "exports",
+                  "columnNumber": 5743,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 58,
+                  "functionName": "",
+                  "typeName": "Object",
+                  "methodName": null,
+                  "columnNumber": 7440,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 15,
+                  "functionName": null,
+                  "typeName": null,
+                  "methodName": null,
+                  "columnNumber": 26,
+                  "native": false
+                },
+                {
+                  "fileName": null,
+                  "lineNumber": null,
+                  "functionName": "Array.forEach",
+                  "typeName": "Array",
+                  "methodName": "forEach",
+                  "columnNumber": null,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 14,
+                  "functionName": "Object.emit",
+                  "typeName": "Object",
+                  "methodName": "emit",
+                  "columnNumber": 54,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 51,
+                  "functionName": null,
+                  "typeName": null,
+                  "methodName": null,
+                  "columnNumber": 24,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 5,
+                  "functionName": null,
+                  "typeName": null,
+                  "methodName": null,
+                  "columnNumber": 21,
+                  "native": false
+                },
+                {
+                  "fileName": "evalmachine.<anonymous>",
+                  "lineNumber": 6,
+                  "functionName": null,
+                  "typeName": null,
+                  "methodName": null,
+                  "columnNumber": 18,
+                  "native": false
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 74
+    },
+    "failures": [
+      {
+        "error": {
+          "name": "AssertionError",
+          "message": "expected '用户名已使用，请输入未使用用户名' to deeply equal '成功'",
+          "showDiff": true,
+          "actual": "用户名已使用，请输入未使用用户名",
+          "expected": "成功",
+          "operator": "strictEqual",
+          "stack": "AssertionError: expected '用户名已使用，请输入未使用用户名' to deeply equal '成功'\n    at Object.eval (eval at exec (evalmachine.<anonymous>:58:1788403), <anonymous>:11:48)\n    at u.exec (evalmachine.<anonymous>:58:1788438)\n    at t.exports (evalmachine.<anonymous>:58:5743)\n    at Object.<anonymous> (evalmachine.<anonymous>:58:7440)\n    at evalmachine.<anonymous>:15:26\n    at Array.forEach (<anonymous>)\n    at Object.emit (evalmachine.<anonymous>:14:54)\n    at evalmachine.<anonymous>:51:24\n    at evalmachine.<anonymous>:5:21\n    at evalmachine.<anonymous>:6:18",
+          "checksum": "667100151aaedd296545354858b827c4",
+          "id": "27ec0c96-5764-46df-a92b-6fbadd891779",
+          "timestamp": 1676109272689,
+          "stacktrace": [
+            {
+              "fileName": "<anonymous>",
+              "lineNumber": 11,
+              "functionName": "Object.eval (eval at exec (evalmachine.<anonymous>:58:1788403),",
+              "typeName": "Object",
+              "methodName": "eval (eval at exec (evalmachine.<anonymous>:58:1788403),",
+              "columnNumber": 48,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 58,
+              "functionName": "u.exec",
+              "typeName": "u",
+              "methodName": "exec",
+              "columnNumber": 1788438,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 58,
+              "functionName": "t.exports",
+              "typeName": "t",
+              "methodName": "exports",
+              "columnNumber": 5743,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 58,
+              "functionName": "",
+              "typeName": "Object",
+              "methodName": null,
+              "columnNumber": 7440,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 15,
+              "functionName": null,
+              "typeName": null,
+              "methodName": null,
+              "columnNumber": 26,
+              "native": false
+            },
+            {
+              "fileName": null,
+              "lineNumber": null,
+              "functionName": "Array.forEach",
+              "typeName": "Array",
+              "methodName": "forEach",
+              "columnNumber": null,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 14,
+              "functionName": "Object.emit",
+              "typeName": "Object",
+              "methodName": "emit",
+              "columnNumber": 54,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 51,
+              "functionName": null,
+              "typeName": null,
+              "methodName": null,
+              "columnNumber": 24,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 5,
+              "functionName": null,
+              "typeName": null,
+              "methodName": null,
+              "columnNumber": 21,
+              "native": false
+            },
+            {
+              "fileName": "evalmachine.<anonymous>",
+              "lineNumber": 6,
+              "functionName": null,
+              "typeName": null,
+              "methodName": null,
+              "columnNumber": 18,
+              "native": false
+            }
+          ]
+        },
+        "at": "test-script:9:48",
+        "source": {
+          "id": "19c0439f-5154-409d-89ed-a81ec4889182",
+          "name": "用户注册1.3",
+          "request": {
+            "url": {
+              "path": [
+                "dreamfuture",
+                "iam",
+                "user",
+                "v1.3",
+                "userregister"
+              ],
+              "host": [
+                "{{httpsurl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"zhouhaifeng{{$randomInt}}\",\r\n    \"password\": {{password}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8419c522-32bf-49cc-8c40-ee4e80649831",
+                "type": "text/javascript",
+                "exec": [
+                  "// 测试脚本\r",
+                  "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                  "});\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                  "\r",
+                  "if(JSON.parse(responseBody).code == 0){\r",
+                  "    // 参数设置脚本\r",
+                  "    pm.globals.set(\"username\", JSON.parse(responseBody).data.name);\r",
+                  "}else{\r",
+                  "    postman.setNextRequest(\"null\");\r",
+                  "}"
+                ],
+                "_lastExecutionId": "aa0b20f6-38b1-4461-ac91-544f2599aba2"
+              }
+            }
+          ]
+        },
+        "parent": {
+          "_": {
+            "postman_id": "a08a8fa7-c02b-44d2-b4ac-72d13c0739d0"
+          },
+          "item": [
+            {
+              "id": "19c0439f-5154-409d-89ed-a81ec4889182",
+              "name": "用户注册1.3",
+              "request": {
+                "url": {
+                  "path": [
+                    "dreamfuture",
+                    "iam",
+                    "user",
+                    "v1.3",
+                    "userregister"
+                  ],
+                  "host": [
+                    "{{httpsurl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"zhouhaifeng{{$randomInt}}\",\r\n    \"password\": {{password}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "8419c522-32bf-49cc-8c40-ee4e80649831",
+                    "type": "text/javascript",
+                    "exec": [
+                      "// 测试脚本\r",
+                      "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                      "\r",
+                      "if(JSON.parse(responseBody).code == 0){\r",
+                      "    // 参数设置脚本\r",
+                      "    pm.globals.set(\"username\", JSON.parse(responseBody).data.name);\r",
+                      "}else{\r",
+                      "    postman.setNextRequest(\"null\");\r",
+                      "}"
+                    ],
+                    "_lastExecutionId": "aa0b20f6-38b1-4461-ac91-544f2599aba2"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "53fd809d-26c9-465b-9bac-60708ccd4e2d",
+              "name": "获取验证码",
+              "request": {
+                "url": {
+                  "path": [
+                    "dreamfuture",
+                    "captcha",
+                    "v1.3",
+                    "getCaptcha"
+                  ],
+                  "host": [
+                    "{{httpsurl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "9917672a-13a9-486b-a43e-d5b803d436a0",
+                    "type": "text/javascript",
+                    "exec": [
+                      "// 测试脚本\r",
+                      "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                      "\r",
+                      "if(JSON.parse(responseBody).code == 0){\r",
+                      "    // 参数设置脚本\r",
+                      "    pm.globals.set(\"uuid\", JSON.parse(responseBody).data.uuid);\r",
+                      "}else{\r",
+                      "    postman.setNextRequest(\"null\");\r",
+                      "}"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "f57a6f27-7530-4113-972a-9b5748a1d95a",
+              "name": "用户列表1.0",
+              "request": {
+                "url": {
+                  "path": [
+                    "dreamfuture",
+                    "iam",
+                    "user",
+                    "v1.31",
+                    "users"
+                  ],
+                  "host": [
+                    "{{httpsurl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "token.eyJraWQiOiI0MyIsInR5cCI6IkpXVCIsImFsZyI6IkhTMjU2In0.eyJzdWIiOiIxMjM0IiwiZXhwIjoxNjE0NjY1NTI1LCJpYXQiOjE2MTQ2NjQ5MjV9.6hQgnVLFYj_4zFZZH_Ka3bbG3KLdHebhr9WIccAfkUw"
+                  }
+                ],
+                "method": "GET"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "a3121f19-9297-4f7b-a5a7-19095d5a0ed5",
+                    "type": "text/javascript",
+                    "exec": [
+                      "// 测试脚本\r",
+                      "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                      "\r",
+                      "if(JSON.parse(responseBody).code != 0){\r",
+                      "    postman.setNextRequest(\"null\");\r",
+                      "}"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "374ab20d-8658-4b31-b6fc-9d68e756787b",
+              "name": "用户登录1.3",
+              "request": {
+                "url": {
+                  "path": [
+                    "dreamfuture",
+                    "iam",
+                    "user",
+                    "v1.3",
+                    "userlogin"
+                  ],
+                  "host": [
+                    "{{httpsurl}}"
+                  ],
+                  "query": [
+                    {
+                      "disabled": true,
+                      "key": "name",
+                      "value": "{{name}}"
+                    },
+                    {
+                      "disabled": true,
+                      "key": "password",
+                      "value": "{{password}}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\":\"{{password}}\",\r\n    \"vCodeStr\":\"vfvm\",\r\n    \"uuid\":\"{{uuid}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "type": "string",
+                      "value": "eyJraWQiOm51bGwsInR5cCI6IkpXVCIsImFsZyI6IkhTMjU2In0.eyJpc3MiOiJ3ZWRyZWFtcy5jbiIsImV4cCI6MTY3NTk5OTI4NywidXNlck5hbWUiOiJ6aG91aGFpZmVuZzM3MCIsImlhdCI6MTY3NTk5ODA4NywidXNlcklkIjowfQ.-LntuAqoSBDdOboB44BgvkLldUuXjLTo5Asc2X20R-8",
+                      "key": "token"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "f062fb42-0813-41be-9562-f68bc5b9f9ba",
+                    "type": "text/javascript",
+                    "exec": [
+                      "// 测试脚本\r",
+                      "pm.test(\"Response time is less than 1000ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Your test name\", function () {\r",
+                      "    pm.expect(JSON.parse(responseBody).message).to.eql(\"成功\");\r",
+                      "});\r",
+                      "\r",
+                      "if(JSON.parse(responseBody).code != 0){\r",
+                      "    postman.setNextRequest(\"null\");\r",
+                      "}"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "5886e409-9fb8-4b08-b917-f916152d5e58",
+              "name": "验证码校验",
+              "request": {
+                "url": {
+                  "path": [
+                    "dreamfuture",
+                    "captcha",
+                    "v1",
+                    "checkCaptcha"
+                  ],
+                  "host": [
+                    "{{httpsurl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vCode",
+                      "value": "vfvm"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                }
+              },
+              "response": [],
+              "event": []
+            },
+            {
+              "id": "8ac04d91-489e-4e24-a64b-243666a66ed7",
+              "name": "用户注册（含验证码）1.3",
+              "request": {
+                "url": {
+                  "path": [
+                    "dreamfuture",
+                    "iam",
+                    "user",
+                    "v1.3",
+                    "userregisterwithvcode"
+                  ],
+                  "host": [
+                    "{{httpsurl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"zhouhaifeng1008\",\r\n    \"password\": 123456, \r\n    \"vCodeStr\": \"qejx\",\r\n    \"uuid\": \"b1f41859-3eb0-4c21-b8ad-54edbae1d78b\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": [],
+              "event": []
+            }
+          ],
+          "event": [],
+          "variable": [],
+          "info": {
+            "_postman_id": "a08a8fa7-c02b-44d2-b4ac-72d13c0739d0",
+            "name": "dev_user",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 6,
+          "cycles": 2,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "25361cd9-b07f-4879-b5df-e6b330d36130",
+          "httpRequestId": "42f2407b-f2e0-40d2-8c2a-a65f5112e0e4",
+          "scriptId": "8419c522-32bf-49cc-8c40-ee4e80649831"
+        }
+      }
+    ],
+    "error": null
+  }
+}
