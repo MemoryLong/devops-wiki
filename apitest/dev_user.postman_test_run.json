@@ -11,7 +11,7 @@
 		{
 			"id": "349cd3ed-e37e-4d73-9a2b-716af6fac75c",
 			"name": "用户注册1.3",
-			"url": "https://localhost/dreamfuture/iam/user/v1.3/userregister",
+			"url": "https://dev/dreamfuture/iam/user/v1.3/userregister",
 			"time": 129,
 			"responseCode": {
 				"code": 200,
